@@ -1,0 +1,40 @@
+<nav>
+    <a routerLink="/books">Back to books</a>
+</nav>
+
+<div>
+    <h1>Update book</h1>
+    <form class="needs-validation" [formGroup]="bookForm" (ngSubmit)="submitForm()" novalidate>
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" formControlName="title" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Author</label>
+            <input type="text" formControlName="author" class="form-control" maxlength="100" required>
+        </div>
+        <div class="form-group">
+            <label>Price</label>
+            <input type="text" formControlName="price" class="form-control" required>
+        </div>
+        <button class="btn btn-success">Update</button>
+    </form>
+</div>
+
+<!-- <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <div class="form-group col-md-6">
+        <input name="title" class="form-control" placeholder="Title" ngModel required>
+    </div>
+    <div class="form-group col-md-6">
+        <input name="author" class="form-control" placeholder="Author" ngModel required>
+    </div>
+    <div class="form-group col-md-6">
+        <input name="description" class="form-control" placeholder="Description" ngModel required>
+    </div>
+    <div class="form-group col-md-6">
+        <input name="price" class="form-control" placeholder="Price" ngModel required>
+    </div>
+    <div class="form-group col-md-6">
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+</form> -->

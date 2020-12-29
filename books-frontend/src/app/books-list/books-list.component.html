@@ -1,0 +1,35 @@
+<nav>
+  <a routerLink="/update">Update</a>
+</nav>
+
+<nav>
+  <a routerLink="/add">Add a book</a>
+</nav>
+
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Price</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books">
+          <td>{{ book.id }}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.price }}</td>
+          <td>
+            <button type="button" class="btn btn-primary" routerLink="/update">Update</button>
+            <button type="button" class="btn btn-danger" (click)="delete(book.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
