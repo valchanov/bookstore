@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Book } from '../book';
-import { Router, ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { first, switchMap } from 'rxjs/operators';
 import { BookService } from '../book.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-update-book',
@@ -11,13 +12,14 @@ import { BookService } from '../book.service';
   styleUrls: ['./update-book.component.css']
 })
 export class UpdateBookComponent implements OnInit {
-
   book: Book;
   bookForm: FormGroup;
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
-    private bookService: BookService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private bookService: BookService
+  ) {
   }
 
   // ngOnInit() {
@@ -41,22 +43,28 @@ export class UpdateBookComponent implements OnInit {
   //   });
   // }
 
+  // ngOnInit() {
+  //   this.route.params.subscribe(params => {
+  //     this.book.title = params['title'];
+
+  //     this.book = {
+  //       id: null,
+  //       title: params['title'],
+  //       author: params['author'],
+  //       description: params['description'],
+  //       price: params['price']
+  //     }
+  //   });
+
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.book.title = params['title'];
+    this.book = <Book>{};
+    const id = this.route.snapshot.params['id'];
 
-      this.book = {
-        id: null,
-        title: params['title'],
-        author: params['author'],
-        description: params['description'],
-        price: params['price']
-      }
-
-    });
-
-
-
+    this.bookService.getBook(+id)
+      .subscribe(data => {
+        console.log(data)
+        this.book = data;
+      }, error => console.log(error));
   }
 
   onSubmit() {
@@ -76,15 +84,16 @@ export class UpdateBookComponent implements OnInit {
     //     });
   }
 
-  update(id: number): void {
-    this.bookService.update(this.book);
-  }
+  // update(id: number): void {
+  //   this.bookService.update(this.book);
+  // }
 
-  getBook(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.bookService.getBook(id)
-      .subscribe(book => this.book = book);
-  }
+  // getBook(): void {
+  //   const id = +this.route.snapshot.paramMap.get('id');
+  //   this.bookService.getBook(id)
+  //     .subscribe(book => this.book = book);
+  // }
 
-  submitForm() { }
+  //submitForm() {this.book$.getValue().title = ""; }
+
 }

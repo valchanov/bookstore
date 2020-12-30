@@ -9,7 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
   { path: '', redirectTo: '/books', pathMatch: 'full' },
   { path: 'books', component: BooksListComponent },
-  { path: 'update', component: UpdateBookComponent },
+  { path: 'update/:id', component: UpdateBookComponent },
   { path: 'add', component: AddBookComponent },
   { path: '**', component: PageNotFoundComponent }
 ];

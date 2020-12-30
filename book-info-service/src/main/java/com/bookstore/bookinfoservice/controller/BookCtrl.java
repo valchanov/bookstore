@@ -17,7 +17,7 @@ public class BookCtrl {
     }
 
     @GetMapping("/{id}")
-    public Optional getBookInfo(@PathVariable("bookId") Long id) {
+    public Optional getBookInfo(@PathVariable("id") Long id) {
         return bookService.findBookById(id);
     }
 
