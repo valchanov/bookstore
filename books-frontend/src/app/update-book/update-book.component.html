@@ -2,6 +2,8 @@
     <a routerLink="/books">Back to books</a>
 </nav>
 
+<h2>Edit book info</h2>
+
 <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
     <div class="form-group col-md-6">
         <input name="title" class="form-control" placeholder="Title" [(ngModel)]="book.title" required>
@@ -10,12 +12,14 @@
         <input name="author" class="form-control" placeholder="Author" [(ngModel)]="book.author" required>
     </div>
     <div class="form-group col-md-6">
-        <input name="description" class="form-control" placeholder="Description" [(ngModel)]="book.description" required>
+        <input name="description" class="form-control" placeholder="Description" [(ngModel)]="book.description"
+            required>
     </div>
     <div class="form-group col-md-6">
         <input name="price" class="form-control" placeholder="Price" [(ngModel)]="book.price" required>
     </div>
     <div class="form-group col-md-6">
         <button type="submit" class="btn btn-success">Submit</button>
+        <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
     </div>
 </form>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Book } from '../book';
 import { BookService } from '../book.service';
 
@@ -11,7 +12,8 @@ import { BookService } from '../book.service';
 export class AddBookComponent implements OnInit {
   book: Book;
 
-  constructor(private bookService: BookService) {
+  constructor(private router: Router,
+    private bookService: BookService) {
   }
 
   ngOnInit(): void {
@@ -33,5 +35,9 @@ export class AddBookComponent implements OnInit {
       });
 
     f.reset();
+  }
+
+  cancel() {
+    this.router.navigate(['/books']);
   }
 }
