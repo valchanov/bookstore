@@ -54,14 +54,4 @@ export class BookService {
       })
     );
   }
-
-  add(book: Book): Observable<Book> {
-    return this.http.post<Book>(this.baseUrl, book, this.httpOptions).pipe(
-      tap((newBook: Book) => console.log(`added book w/ id=${newBook.id}`)),
-      catchError(err => {
-        console.log('Handling error locally and rethrowing it...', err);
-        return throwError(err);
-      })
-    );
-  }
 }
