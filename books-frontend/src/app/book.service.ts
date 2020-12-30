@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-
-import { Book } from './book';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { Book } from './book';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,47 +13,13 @@ export class BookService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-
-
   errorMessage: any;
   httpClient: any;
 
   constructor(private http: HttpClient) { }
 
-  // public getAll(): Observable<Book[]> {
-  //   return this.http.get<Book[]>(this.baseUrl);
-  // }
-
   public save(book: Book) {
     return this.http.post<Book>(this.baseUrl, book);
-  }
-
-  // public delete(id: number) {
-  //   const url = `${this.baseUrl}/${id}`;
-
-  //   return this.http.delete(url)
-  //     .subscribe({
-  //       next: data => {
-  //         console.log('Delete successful');
-  //       },
-  //       error: error => {
-  //         this.errorMessage = error.message;
-  //         console.error('There was an error!', error);
-  //       }
-  //     });
-  // }
-
-  public update(book: Book): void {
-    this.http.put<Book>(this.baseUrl, book)
-      .subscribe({
-        next: data => {
-          console.log('Update successful');
-        },
-        error: error => {
-          this.errorMessage = error.message;
-          console.error('There was an error!', error);
-        }
-      });
   }
 
   getAll(): Observable<Book[]> {
@@ -81,17 +47,7 @@ export class BookService {
     const url = `${this.baseUrl}/${id}`;
 
     return this.http.delete<Book>(url, this.httpOptions).pipe(
-      tap(_ => console.log('Delete successfully')),
-      catchError(err => {
-        console.log('Handling error locally and rethrowing it...', err);
-        return throwError(err);
-      })
-    );
-  }
-
-  updateBook(book: Book): Observable<any> {
-    return this.http.put(this.baseUrl, book, this.httpOptions).pipe(
-      tap(_ => console.log('Updated successfully')),
+      tap(_ => console.log('Book deleted successfully')),
       catchError(err => {
         console.log('Handling error locally and rethrowing it...', err);
         return throwError(err);
@@ -108,9 +64,4 @@ export class BookService {
       })
     );
   }
-  
-  // updateHero(book: Book): Observable<Book> {
-  //   return this.http.put<Book>(this.baseUrl, book)
-  // }
-
 }

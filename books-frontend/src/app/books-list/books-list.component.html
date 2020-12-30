@@ -1,6 +1,5 @@
-<nav>
-  <a routerLink="/add">Add a book</a>
-</nav>
+<button type="button" class="btn btn-success" (click)="navigateToAdd()">Add a book</button>
+
 
 <div class="card my-5">
   <div class="card-body">
@@ -21,8 +20,10 @@
           <td>{{ book.author }}</td>
           <td>{{ book.price }}</td>
           <td>
-            <button type="button" class="btn btn-primary" [routerLink]="['/update', book.id]">Update</button>
-            <button type="button" class="btn btn-danger" (click)="delete(book.id)">Delete</button>
+            <button type="button" class="btn btn-primary" [routerLink]="['/update', book.id]">
+              <span class="material-icons"> edit </span></button>
+            <button type="button" class="btn btn-danger" (click)="delete(book.id)"><span class="material-icons">
+                delete </span></button>
           </td>
         </tr>
       </tbody>
