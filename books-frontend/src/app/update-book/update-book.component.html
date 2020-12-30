@@ -2,7 +2,7 @@
     <a routerLink="/books">Back to books</a>
 </nav>
 
-<div>
+<!-- <div>
     <h1>Update book</h1>
     <form class="needs-validation" [formGroup]="bookForm" (ngSubmit)="submitForm()" novalidate>
         <div class="form-group">
@@ -19,9 +19,9 @@
         </div>
         <button class="btn btn-success">Update</button>
     </form>
-</div>
+</div> -->
 
-<!-- <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+<form #f="ngForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="form-group col-md-6">
         <input name="title" class="form-control" placeholder="Title" ngModel required>
     </div>
@@ -37,4 +37,4 @@
     <div class="form-group col-md-6">
         <button type="submit" class="btn btn-success">Submit</button>
     </div>
-</form> -->
+</form>

@@ -9,13 +9,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { UpdateBookComponent } from './update-book/update-book.component';
 import { AddBookComponent } from './add-book/add-book.component';
+import { MatIconModule } from '@angular/material/icon';
+import { HeaderComponent } from './header/header.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BooksListComponent,
     UpdateBookComponent,
-    AddBookComponent
+    AddBookComponent,
+    HeaderComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +28,8 @@ import { AddBookComponent } from './add-book/add-book.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

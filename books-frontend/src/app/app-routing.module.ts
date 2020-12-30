@@ -3,13 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { BooksListComponent } from './books-list/books-list.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
 import { AddBookComponent } from './add-book/add-book.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/books', pathMatch: 'full' },
   { path: 'books', component: BooksListComponent },
   { path: 'update', component: UpdateBookComponent },
-  { path: 'add', component: AddBookComponent }
+  { path: 'add', component: AddBookComponent },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

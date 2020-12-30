@@ -14,7 +14,11 @@ export class UpdateBookComponent implements OnInit {
 
   book: Book;
   bookForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private router: Router, private bookService: BookService, private route: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder,
+    private router: Router,
+    private bookService: BookService,
+    private route: ActivatedRoute) {
+  }
 
   // ngOnInit() {
   //   let bookId = window.localStorage.getItem("book.id");
@@ -31,16 +35,28 @@ export class UpdateBookComponent implements OnInit {
   //     age: ['', Validators.required],
   //     salary: ['', Validators.required]
   //   });
-    // this.bookService.getBook(+bookId)
-    //   .subscribe(data => {
-    //     this.editForm.setValue(data.result);
-    //   });
+  // this.bookService.getBook(+bookId)
+  //   .subscribe(data => {
+  //     this.editForm.setValue(data.result);
+  //   });
   // }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.book.title = params['title'];
+
+      this.book = {
+        id: null,
+        title: params['title'],
+        author: params['author'],
+        description: params['description'],
+        price: params['price']
+      }
+
     });
+
+
+
   }
 
   onSubmit() {
@@ -60,7 +76,7 @@ export class UpdateBookComponent implements OnInit {
     //     });
   }
 
-  update(id : number): void {
+  update(id: number): void {
     this.bookService.update(this.book);
   }
 
@@ -70,5 +86,5 @@ export class UpdateBookComponent implements OnInit {
       .subscribe(book => this.book = book);
   }
 
-  submitForm(){}
+  submitForm() { }
 }
