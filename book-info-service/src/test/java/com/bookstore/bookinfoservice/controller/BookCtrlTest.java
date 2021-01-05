@@ -118,6 +118,28 @@ class BookCtrlTest {
     }
 
     @Test
+    void editBook() throws Exception {
+        Book book = Book.builder()
+                        .id(1L)
+                        .title("Winnetou")
+                        .author("Karl May")
+                        .description("some description goes here")
+                        .price(new BigDecimal("11.11"))
+                        .build();
+
+        String bookJson = new ObjectMapper().writeValueAsString(book);
+
+        mockMvc.perform(put("/books/")
+                            .content(bookJson)
+                            .contentType("application/json"))
+               .andDo(print())
+               .andExpect(status().isOk())
+               .andDo(document("{methodName}",
+                               preprocessRequest(prettyPrint()),
+                               preprocessResponse(prettyPrint())));
+    }
+
+    @Test
     void deleteBook() throws Exception {
         mockMvc.perform(delete("/books/{id}", 1L))
                .andDo(print())

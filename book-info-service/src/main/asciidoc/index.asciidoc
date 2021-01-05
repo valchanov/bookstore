@@ -33,3 +33,11 @@ include::{snippets}/deleteBook/http-request.adoc[]
 
 .response
 include::{snippets}/deleteBook/http-response.adoc[]
+
+== Edit a book
+
+.request
+include::{snippets}/editBook/http-request.adoc[]
+
+.response
+include::{snippets}/editBook/http-response.adoc[]
