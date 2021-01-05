@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "description": "some description goes here",
+    "price": 50
+  },
+  {
+    "id": 2,
+    "title": "Brothers Karamazov",
+    "author": "Fedor Dostoevskiy",
+    "description": "some description goes here",
+    "price": 40
+  },
+  {
+    "id": 3,
+    "title": "War and Peace",
+    "author": "Leo Tolstoy",
+    "description": "some description goes here",
+    "price": 22.22
+  },
+  {
+    "id": 4,
+    "title": "Fredrik Backman",
+    "author": "Author of A Man Called Ove",
+    "description": "some description goes here",
+    "price": 15
+  },
+  {
+    "id": 5,
+    "title": "Fredrik Backman",
+    "author": "My Grandmother Asked Me to Tell You She is Sorry",
+    "description": "some description goes here",
+    "price": 20.21
+  },
+  {
+    "id": 6,
+    "title": "Anna Karenina",
+    "author": "Leo Tolstoy",
+    "description": "some description goes here",
+    "price": 30.12
+  }
+]
