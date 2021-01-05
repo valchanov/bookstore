@@ -1,0 +1,35 @@
+= Book info service
+
+This is an example output for a service running at http://localhost:8080:
+
+== Add a book
+
+.request
+include::{snippets}/addBook/http-request.adoc[]
+
+.response
+include::{snippets}/addBook/http-response.adoc[]
+
+== GET a book
+
+.request
+include::{snippets}/getBook/http-request.adoc[]
+
+.response
+include::{snippets}/getBook/http-response.adoc[]
+
+== GET all books
+
+.request
+include::{snippets}/getAllBooks/http-request.adoc[]
+
+.response
+include::{snippets}/getAllBooks/http-response.adoc[]
+
+== Delete a book
+
+.request
+include::{snippets}/deleteBook/http-request.adoc[]
+
+.response
+include::{snippets}/deleteBook/http-response.adoc[]

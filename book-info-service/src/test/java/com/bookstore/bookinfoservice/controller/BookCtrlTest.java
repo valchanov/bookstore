@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -24,14 +24,14 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith( { RestDocumentationExtension.class })
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets")
 @SpringBootTest
+@Sql( { "/delete.sql", "/test-data.sql" })
 class BookCtrlTest {
     @Autowired
     ObjectMapper mapper;
@@ -98,6 +98,7 @@ class BookCtrlTest {
     @Test
     void addBook() throws Exception {
         Book book = Book.builder()
+                        .id(7L)
                         .title("Winnetou")
                         .author("Karl May")
                         .description("some description goes here")
@@ -109,6 +110,16 @@ class BookCtrlTest {
         mockMvc.perform(post("/books/")
                             .content(bookJson)
                             .contentType("application/json"))
+               .andDo(print())
+               .andExpect(status().isOk())
+               .andDo(document("{methodName}",
+                               preprocessRequest(prettyPrint()),
+                               preprocessResponse(prettyPrint())));
+    }
+
+    @Test
+    void deleteBook() throws Exception {
+        mockMvc.perform(delete("/books/{id}", 1L))
                .andDo(print())
                .andExpect(status().isOk())
                .andDo(document("{methodName}",
