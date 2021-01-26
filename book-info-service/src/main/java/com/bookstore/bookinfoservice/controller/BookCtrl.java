@@ -1,7 +1,9 @@
 package com.bookstore.bookinfoservice.controller;
 
+import com.bookstore.bookinfoservice.aspect.Loggable;
 import com.bookstore.bookinfoservice.model.Book;
 import com.bookstore.bookinfoservice.service.BookService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -9,13 +11,11 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/books")
 @RestController
+@RequiredArgsConstructor
 public class BookCtrl {
-    private BookService bookService;
+    private final BookService bookService;
 
-    public BookCtrl(BookService bookService) {
-        this.bookService = bookService;
-    }
-
+    @Loggable
     @GetMapping("/{id}")
     public Optional getBookInfo(@PathVariable("id") Long id) {
         return bookService.findBookById(id);
