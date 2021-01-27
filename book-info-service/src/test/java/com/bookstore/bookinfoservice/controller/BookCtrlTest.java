@@ -2,27 +2,24 @@ package com.bookstore.bookinfoservice.controller;
 
 import com.bookstore.bookinfoservice.model.Book;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.restdocs.RestDocumentationContextProvider;
+import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -30,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith( { RestDocumentationExtension.class })
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets")
+@AutoConfigureMockMvc
 @SpringBootTest
 @Sql( { "/delete.sql", "/test-data.sql" })
 class BookCtrlTest {
@@ -37,18 +35,8 @@ class BookCtrlTest {
     ObjectMapper mapper;
 
     @Autowired
-    private WebApplicationContext wac;
-
     private MockMvc mockMvc;
 
-    @BeforeEach
-    public void setUp(RestDocumentationContextProvider restDocumentation) {
-
-        this.mockMvc = MockMvcBuilders
-            .webAppContextSetup(wac)
-            .apply(documentationConfiguration(restDocumentation))
-            .build();
-    }
 
     @Test
     void getAllBooks() throws Exception {
@@ -68,10 +56,13 @@ class BookCtrlTest {
     void getBook() throws Exception {
         mockMvc.perform(get("/books/{id}", 1L))
                .andExpect(status().isOk())
+               .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                .andDo(print())
                .andExpect(header().string("Content-Type", "application/json"))
-               .andExpect(content().string(containsString("Jane Austen")))
-               .andExpect(content().string(containsString("Pride and Prejudice")))
+//               .andExpect(content().string(containsString("Jane Austen")))
+//               .andExpect(content().string(containsString("Pride and Prejudice")))
+               .andExpect(jsonPath("$.author", is("Jane Austen")))
+               .andExpect(jsonPath("$.title", is("Pride and Prejudice")))
                .andDo(document("{methodName}",
                                preprocessRequest(prettyPrint()),
                                preprocessResponse(prettyPrint())));
