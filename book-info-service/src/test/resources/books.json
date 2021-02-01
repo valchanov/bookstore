@@ -22,15 +22,15 @@
   },
   {
     "id": 4,
-    "title": "Fredrik Backman",
-    "author": "Author of A Man Called Ove",
+    "title": "Author of A Man Called Ove",
+    "author": "Fredrik Backman",
     "description": "some description goes here",
     "price": 15
   },
   {
     "id": 5,
-    "title": "Fredrik Backman",
-    "author": "My Grandmother Asked Me to Tell You She is Sorry",
+    "title": "My Grandmother Asked Me to Tell You She is Sorry",
+    "author": "Fredrik Backman",
     "description": "some description goes here",
     "price": 20.21
   },

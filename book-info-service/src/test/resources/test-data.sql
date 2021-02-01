@@ -1,4 +1,4 @@
-INSERT INTO book (id, title, author, description, price)
+INSERT INTO books (id, title, author, description, price)
 VALUES (1, 'Pride and Prejudice', 'Jane Austen', 'some description goes here', 50.00),
        (2, 'Brothers Karamazov', 'Fedor Dostoevskiy', 'some description goes here', 40.00),
        (3, 'War and Peace', 'Leo Tolstoy', 'some description goes here', 22.22),
