@@ -3,7 +3,7 @@ Simple CRUD project with Spring Boot and Angular.
 
 ##
 Running the Project:
-- Start book-info-service backend project which runs on localhost:8080
+- Start book-info-service backend project which runs on localhost:9090
 - Start books-frontend project which runs on localhost:4200
 
 ##
